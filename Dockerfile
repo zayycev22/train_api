@@ -1,9 +1,12 @@
 FROM python:3.9-slim
-LABEL author="Kostya Kamanin" maintainer="Shishka"
+ENV PYTHONUNBUFFERED=1
 
+WORKDIR /code
 
-WORKDIR /usr/src/app
+COPY requirements.txt /code/requirements.txt
 
-COPY ../../../Downloads/shisha/shisha/backend .
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-RUN pip install -r reqs.txt
+COPY . /code/
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]

@@ -1,22 +1,12 @@
+version: "3.9"
 services:
-
-  backend:
-
-    image:        shishka/backend
-
-    command:      bash -c "pip install -r reqs.txt -t /pip-packages   &&   python3 main.py"
-
-    working_dir:  /usr/src/app
-
+  app:
     build:
-      context: ../../../Downloads/shisha/shisha/backend
+      context: .
       dockerfile: Dockerfile
-
-    environment:
-      PYTHONPATH: /pip-packages
-
     volumes:
-      - ./backend/data.local/pip-packages:/pip-packages
-      - ./backend/data.local/pip-cache:/root/.cache/pip
-
-              
+      - .:/code
+    ports:
+      - 127.0.0.1:8000:8000
+    container_name: backend
+    restart: on-failure

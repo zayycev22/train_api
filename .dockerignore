@@ -1,0 +1,5 @@
+data.local
+venv
+__pycache__
+files/upload.json
+.idea
